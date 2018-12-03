@@ -2,7 +2,8 @@
 #include "RocketPart.h"
 
 class Thruster : public RocketPart{
-	double thrust;
+public:
+	double thrust;		
 	double efficiency;
 
 	double getThrust();

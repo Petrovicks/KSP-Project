@@ -5,4 +5,6 @@ public:
 
 	double getMass();
 	void setMass(double inMass);
+
+	virtual double calcDrag() const = 0;
 };

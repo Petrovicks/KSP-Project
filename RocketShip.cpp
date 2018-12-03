@@ -5,7 +5,7 @@ RocketShip::RocketShip(RocketPart &inRP){
 }
 
 double RocketShip::calculateTWR() {
-	return thrust / (mass * 9.8);//totalThrust over totalWeight 
+	return thrust / (mass * 9.81); //total Thrust over total Weight on Earth
 }
 
 double RocketShip::calculateDeltaV() {
