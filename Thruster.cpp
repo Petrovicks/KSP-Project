@@ -1,5 +1,10 @@
 #include "Thruster.h"
 
+Thruster::Thruster() {
+	thrust = 100.0;
+	efficiency = 1.00;
+}
+
 double Thruster::getThrust() {
 	return thrust;
 }

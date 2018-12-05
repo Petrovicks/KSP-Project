@@ -4,6 +4,7 @@
 
 class FuelTank : public RocketPart {
 public:
+	FuelTank();
 	double capacity;	// how much fuel by mass there is
 	//double fuelDensity;	// energy density of the fuel, Megajoules per kg
 						// for refrence, liquid Hydrogen has 142MJ/kg

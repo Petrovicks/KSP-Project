@@ -3,12 +3,14 @@
 
 class CommandModule : public RocketPart {
 public:
-	double numPassengers;	// will add mass to rocket
+	CommandModule();
+	int numPassengers;	// will add mass to rocket
 	double pathEfficiency;	// linear efficiency term to represent deviation from optimal path
 
-	double getNumberPassengers();
+	int getNumberPassengers();
 	double getPathEffiency();
+	double calcDrag();
 
-	void setNumberPassengers(double inPassengers);
+	void setNumberPassengers(int inPassengers);
 	void setPathEfficiency(double inPathEff);
 };

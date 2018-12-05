@@ -1,5 +1,9 @@
 #include "FuelTank.h"
 
+FuelTank::FuelTank() {
+	capacity = 100.0;
+}
+
 double FuelTank::getCapacity() {
 	return capacity;
 }

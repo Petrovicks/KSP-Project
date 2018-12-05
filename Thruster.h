@@ -3,6 +3,7 @@
 
 class Thruster : public RocketPart{
 public:
+	Thruster();
 	double thrust;		
 	double efficiency;
 
