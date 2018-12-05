@@ -11,4 +11,3 @@ double RocketPart::getMass() {
 void RocketPart::setMass(double inMass) {
 	mass = inMass;
 }
-

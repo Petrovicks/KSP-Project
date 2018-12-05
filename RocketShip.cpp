@@ -1,8 +1,8 @@
 #include "RocketShip.h"
 
-RocketShip::RocketShip(RocketPart &inRP){
+// RocketShip::RocketShip(RocketPart &inRP){
 
-}
+// }
 
 double RocketShip::calculateTWR() {
 	return thrust / (mass * 9.81); //total Thrust over total Weight on Earth

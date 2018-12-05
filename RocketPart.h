@@ -1,11 +1,16 @@
-#pragma once
+#ifndef ROCKETPART_H
+#define ROCKETPART_H
+
 class RocketPart {
 public:
 	RocketPart();
-	double mass;	//part mass in kilograms
 
 	double getMass();
 	void setMass(double inMass);
 
-	virtual double calcDrag() const = 0;
+	virtual double calcDrag() = 0;
+private:
+	double mass;	//part mass in kilograms
 };
+
+#endif
