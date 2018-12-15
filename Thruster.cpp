@@ -23,3 +23,11 @@ void Thruster::setEfficiency(double inEff) {
 std::string Thruster::partType() {
 	return "Thruster";
 }
+
+double Thruster::calcDrag() {
+	return 1 - (thrust / (1000*thrust*efficiency));	// A more efficient thruster is smaller
+}
+
+void Thruster::setMass(double inMass) {
+	mass = inMass;
+}

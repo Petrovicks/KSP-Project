@@ -11,11 +11,12 @@ public:
 	int getNumberPassengers();
 	double getPathEffiency();
 
-	std::string partType();
-	double calcDrag();
-
 	void setNumberPassengers(int inPassengers);
 	void setPathEfficiency(double inPathEff);
+
+	std::string partType();
+	double calcDrag();
+	void setMass(double inMass);	
 private:
 	int numPassengers;	// will add mass to rocket
 	double pathEfficiency;	// linear efficiency term to represent deviation from optimal path

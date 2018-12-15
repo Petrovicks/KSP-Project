@@ -7,19 +7,18 @@
 class FuelTank : public RocketPart {
 public:
 	FuelTank();
-	//double fuelDensity;	// energy density of the fuel, Megajoules per kg
-						// for refrence, liquid Hydrogen has 142MJ/kg
-						// this makes the math harder, might not be worth considering
-
-	std::string partType();
 
 	double getCapacity();
-	//double getFuelDensity();
-
+	double getFuelDensity();
 	void setCapacity(double inCapacity);
-	//void setFuelDensity(double inFuelDensity);
+	void setFuelDensity(double inFuelDensity);
+
+	std::string partType();
+	double calcDrag();
+	void setMass(double inMass);
 private:
 	double capacity;	// how much fuel by mass there is
+	double fuelDensity;	// how heavy the fuel is (unit mass per unit fuel)
 };
 
 #endif

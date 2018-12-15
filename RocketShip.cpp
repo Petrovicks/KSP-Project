@@ -14,6 +14,7 @@ RocketShip& RocketShip::operator=(const RocketShip& r) {
 
 RocketShip& RocketShip::operator+=(RocketPart* p) {
 	this->parts.push_back(p);
+	return *this;
 }
 
 double RocketShip::calculateTWR() {
