@@ -1,5 +1,6 @@
 #include "RocketShip.h"
 #include <vector>
+#include <string>
 #include <iostream>
 
 using namespace std;
@@ -23,9 +24,19 @@ double RocketShip::calculateDeltaV() {
 	return 0.0;//see Tsiolkovsky rocket equation
 }
 
+//all parts
 void RocketShip::returnAllParts() {
 	cout << "Constructed rocket: " << endl;
 	for (int i = 0; i < parts.size(); i++) {
 		cout << parts[i]->partType() << " with ID " << i << endl;
 	}
+}
+
+//specific part information exmaple
+string RocketShip::getPartType(int ID) {
+	return parts[ID]->partType();
+}
+
+double RocketShip::getPartMass(int ID) {
+	return parts[ID]->getMass();
 }

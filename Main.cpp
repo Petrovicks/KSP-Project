@@ -21,6 +21,8 @@ int main() {
 
 	plutoisaplanet += c1;
 	plutoisaplanet.returnAllParts();
+	cout << "Part type: " << plutoisaplanet.getPartType(0) << endl;
+	cout << "Part mass: " << plutoisaplanet.getPartMass(0) << endl;
 
 	ifstream testFile;
 	testFile.open("Destinations.ini");

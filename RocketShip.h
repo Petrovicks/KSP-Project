@@ -16,6 +16,9 @@ public:
 	double calculateDeltaV();
 
 	void returnAllParts();
+	RocketPart& returnSpecificPart(int);
+	std::string getPartType(int);
+	double getPartMass(int);
 private:
 	double mass;
 	double thrust;
