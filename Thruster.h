@@ -11,10 +11,12 @@ public:
 	double getThrust();
 	double getEfficiency();
 
-	std::string partType();
-
 	void setThrust(double inThrust);
 	void setEfficiency(double inEff);
+
+	std::string partType();
+	double calcDrag();
+	void setMass(double inMass);
 private:
 	double thrust;
 	double efficiency;
