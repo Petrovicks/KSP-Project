@@ -15,7 +15,7 @@ int main() {
 	cin >> num_passengers;
 
 	c1.setNumberPassengers(num_passengers);
-	cout << "Number of passengers set to " << c1.getNumberPassengers() << endl;
+	cout << "\nNumber of passengers set to " << c1.getNumberPassengers() << endl;
 
 	ifstream testFile;
 	testFile.open("Destinations.ini");
