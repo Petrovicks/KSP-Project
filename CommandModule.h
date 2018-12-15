@@ -2,6 +2,7 @@
 #define COMMANDMODULE_H
 
 #include "RocketPart.h"
+#include <string>
 
 class CommandModule : public RocketPart {
 public:
@@ -9,6 +10,8 @@ public:
 
 	int getNumberPassengers();
 	double getPathEffiency();
+
+	std::string partType();
 	double calcDrag();
 
 	void setNumberPassengers(int inPassengers);

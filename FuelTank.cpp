@@ -1,7 +1,13 @@
 #include "FuelTank.h"
+#include <string>
+
 
 FuelTank::FuelTank() {
 	capacity = 100.0;
+}
+
+std::string FuelTank::partType() {
+	return "Fuel Tank";
 }
 
 double FuelTank::getCapacity() {

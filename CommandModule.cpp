@@ -1,4 +1,6 @@
 #include "CommandModule.h"
+#include <string>
+
 
 CommandModule::CommandModule() {
 	numPassengers = 1;
@@ -11,6 +13,10 @@ int CommandModule::getNumberPassengers() {
 
 double CommandModule::getPathEffiency() {
 	return pathEfficiency;
+}
+
+std::string CommandModule::partType() {
+	return "Command Module";
 }
 
 double CommandModule::calcDrag(){

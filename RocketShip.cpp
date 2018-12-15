@@ -1,8 +1,19 @@
 #include "RocketShip.h"
+#include <vector>
+#include <iostream>
 
-// RocketShip::RocketShip(RocketPart &inRP){
+using namespace std;
 
-// }
+RocketShip::RocketShip() {}
+
+RocketShip& RocketShip::operator=(const RocketShip& r) {
+	this->parts = r.parts;
+	return *this;
+}
+
+RocketShip& RocketShip::operator+=(RocketPart* p) {
+	this->parts.push_back(p);
+}
 
 double RocketShip::calculateTWR() {
 	return thrust / (mass * 9.81); //total Thrust over total Weight on Earth
@@ -10,4 +21,11 @@ double RocketShip::calculateTWR() {
 
 double RocketShip::calculateDeltaV() {
 	return 0.0;//see Tsiolkovsky rocket equation
+}
+
+void RocketShip::returnAllParts() {
+	cout << "Constructed rocket: " << endl;
+	for (int i = 0; i < parts.size(); i++) {
+		cout << parts[i]->partType() << " with ID " << i << endl;
+	}
 }

@@ -2,6 +2,7 @@
 #define THRUSTER_H
 
 #include "RocketPart.h"
+#include <string>
 
 class Thruster : public RocketPart{
 public:
@@ -9,6 +10,8 @@ public:
 
 	double getThrust();
 	double getEfficiency();
+
+	std::string partType();
 
 	void setThrust(double inThrust);
 	void setEfficiency(double inEff);

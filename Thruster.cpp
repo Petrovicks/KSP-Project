@@ -1,4 +1,5 @@
 #include "Thruster.h"
+#include <string>
 
 Thruster::Thruster() {
 	thrust = 100.0;
@@ -17,4 +18,8 @@ void Thruster::setThrust(double inThrust) {
 }
 void Thruster::setEfficiency(double inEff) {
 	efficiency = inEff;
+}
+
+std::string Thruster::partType() {
+	return "Thruster";
 }
