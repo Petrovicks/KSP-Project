@@ -20,34 +20,42 @@
 
 using namespace std;
 
-//Allow for a maximum of 20 planets.
+//Allow for a maximum of 20 planets. Defaults all fields to 0. 
 template <typename T>
 struct Planets {
-	T position[20] = {0}, atmosphericDensity[20] = {0}, gravity[20] = {0};
+	T position[20] = {0}, orbit[20] = {0}, radius[20] = {0}, mass[20] = {0}, gravity[20] = {0};
 	vector<string> planetName = vector<string>(20);
 };
 
+//Enums used to make it easier to add/remove parameters as needed. 
 enum parameterName {
 	Position,
-	Atmospheric,
+	Orbit,
+	Radius,
+	Mass,
 	Gravity,
 };
 
+//Sanitizes the input so it's easier to deal with (eliminates spaces, all to lowercase). 
 string sanitizeLine(string const& inString) {
 	string sanitized = inString;
 	sanitized.erase( remove(sanitized.begin(), sanitized.end(), ' '), sanitized.end() );
-	transform(sanitized.begin(), sanitized.end(), sanitized.begin(), ::tolower);
+	transform(sanitized.begin(), sanitized.end(), sanitized.begin(), ::tolower); //thanks stackoverflow
 
 	return sanitized;
 }
 
 parameterName hashPlanetParameters(string const& inString) {
 	string sanitizedString = sanitizeLine(inString);
-	sanitizedString = sanitizedString.substr(0, sanitizedString.find('='));	
+	sanitizedString = sanitizedString.substr(0, sanitizedString.find('='));
 	if (sanitizedString == "position")
 		return Position;
-	if (sanitizedString == "atmosphericdensity")
-		return Atmospheric;
+	if (sanitizedString == "orbit")
+		return Orbit;
+	if (sanitizedString == "radius")
+		return Radius;
+	if (sanitizedString == "mass")
+		return Mass;
 	if (sanitizedString == "gravity")
 		return Gravity;
 }
@@ -85,13 +93,20 @@ namespace planetParameters
 					planetID++;
 					planetList.planetName[planetID] = getPlanetFromLine(line);
 				}
-				else {
+				else if (line.find("%") == std::string::npos) {
 					switch (hashPlanetParameters(getParamFromLine(line))) {
 						case Position:
 							planetList.position[planetID] = getValueFromLine(line);
 							break;
-						case Atmospheric:
-							planetList.atmosphericDensity[planetID] = getValueFromLine(line);
+						case Orbit:
+							planetList.orbit[planetID] = getValueFromLine(line);
+							break;
+						case Radius:
+							planetList.radius[planetID] = getValueFromLine(line);
+							break;
+						case Mass:
+							planetList.mass[planetID] = getValueFromLine(line);
+							cout << "Mass: " << planetList.mass[planetID] << endl;
 							break;
 						case Gravity:
 							planetList.gravity[planetID] = getValueFromLine(line);

@@ -29,6 +29,7 @@ class RocketShip {
 
 public:
 	RocketShip();
+	~RocketShip() {};
 
 	RocketShip& operator=(const RocketShip& r);
 	RocketShip& operator+=(RocketPart* p);
@@ -43,7 +44,7 @@ public:
 	double getPartMass(int);
 
 	//Getting from origin to destination.
-	void takeAJourney();
+	bool takeAJourney();
 private:
 	double mass;
 	double thrust;
@@ -52,7 +53,6 @@ private:
 	double TWR;
 	double efficiency;
 	double fuelCapacity;
-	double fuelDensity;
 
 	//Vector of base class pointers. 
 	std::vector<RocketPart*> parts;

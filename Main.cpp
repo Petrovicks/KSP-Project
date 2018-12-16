@@ -3,7 +3,6 @@
 #include "FuelTank.h"
 #include "Thruster.h"
 #include "RocketShip.h"
-// #include "Planets.h"
 #include <iostream>
 
 using namespace std;
@@ -96,7 +95,15 @@ int main() {
 
 	//This new function sets changes the values of the member variables. 
 	plutoisaplanet.constructRocket();
-	plutoisaplanet.takeAJourney();
+	bool success = plutoisaplanet.takeAJourney();
 
-	return 0;
+	if (success) {
+		cout << "Congratulations. Goodbye" << endl;
+		return 0;
+	}
+
+	else {
+		cout << "Sorry. Goodbye." << endl;
+		return 0;
+	}
 }
