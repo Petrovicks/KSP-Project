@@ -11,7 +11,7 @@ int CommandModule::getNumberPassengers() {
 	return numPassengers;
 }
 
-double CommandModule::getPathEffiency() {
+double CommandModule::getPathEfficiency() {
 	return pathEfficiency;
 }
 

@@ -23,11 +23,11 @@ using namespace std;
 //Allow for a maximum of 20 planets.
 template <typename T>
 struct Planets {
-	T position[20], atmosphericDensity[20], gravity[20];
+	T position[20] = {0}, atmosphericDensity[20] = {0}, gravity[20] = {0};
 	vector<string> planetName = vector<string>(20);
 };
 
-enum parameterCode {
+enum parameterName {
 	Position,
 	Atmospheric,
 	Gravity,
@@ -41,7 +41,7 @@ string sanitizeLine(string const& inString) {
 	return sanitized;
 }
 
-parameterCode hashPlanetParameters(string const& inString) {
+parameterName hashPlanetParameters(string const& inString) {
 	string sanitizedString = sanitizeLine(inString);
 	sanitizedString = sanitizedString.substr(0, sanitizedString.find('='));	
 	if (sanitizedString == "position")
@@ -70,11 +70,12 @@ double getValueFromLine(string const& inString) {
 	return stod(valueString); //COMPILED WITH C++11
 }
 
-static Planets<double> planetList;
-static int planetCount = 0;
 
 namespace planetParameters
 {
+	Planets<double> planetList;
+	int planetCount = 0;
+
 	void getPlanetParams(ifstream& inFile) {
 		string line;
 		int planetID = 0;
