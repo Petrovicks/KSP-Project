@@ -100,6 +100,7 @@ int main() {
 	ifstream testFile;
 	testFile.open("Planets.ini");
 	planetParameters::getPlanetParams(testFile); //Printing values in ini file as a test for reading in files.
+	cout << "Number of planets: " << planetCount << endl;
 	cout << "Planet one: " << planetList.planetName[1] << endl;
 	cout << "Position: " << planetList.position[1] << endl;
 	cout << "Atmospheric Density: " << planetList.atmosphericDensity[1] << endl;

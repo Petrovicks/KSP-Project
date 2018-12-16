@@ -21,8 +21,9 @@
 using namespace std;
 
 //Allow for a maximum of 20 planets.
+template <typename T>
 struct Planets {
-	double position[20], atmosphericDensity[20], gravity[20];
+	T position[20], atmosphericDensity[20], gravity[20];
 	vector<string> planetName = vector<string>(20);
 };
 
@@ -62,14 +63,15 @@ string getParamFromLine(string const& inString) {
 	return sanitizedString.substr(0, sanitizedString.find('='));
 }
 
-int getValueFromLine(string const& inString) {
+double getValueFromLine(string const& inString) {
 	string sanitizedString = sanitizeLine(inString);
 	int equalSign = sanitizedString.find('=');
 	string valueString = sanitizedString.substr(equalSign+1);
 	return stod(valueString); //COMPILED WITH C++11
 }
 
-static Planets planetList;
+static Planets<double> planetList;
+static int planetCount = 0;
 
 namespace planetParameters
 {
@@ -98,6 +100,7 @@ namespace planetParameters
 			}
 		}
 		inFile.close();
+		planetCount = planetID;
 	}
 }
 
