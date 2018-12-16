@@ -3,7 +3,7 @@
 #include "FuelTank.h"
 #include "Thruster.h"
 #include "RocketShip.h"
-#include "Destinations.h"
+#include "Planets.h"
 #include <iostream>
 
 using namespace std;
@@ -94,13 +94,13 @@ int main() {
 	cout << "Part mass: " << plutoisaplanet.getPartMass(2) << endl << endl;
 
 
-
-
 	//================
 	// File processing
 	//================
 	ifstream testFile;
-	testFile.open("Destinations.ini");
-	destinationParameters::getDestinationParams(testFile); //Printing values in ini file as a test for reading in files.
+	testFile.open("Planets.ini");
+	planetParameters::getPlanetParams(testFile); //Printing values in ini file as a test for reading in files.
+	cout << planetList.planetName[2] << endl;
+
 	return 0;
 }
