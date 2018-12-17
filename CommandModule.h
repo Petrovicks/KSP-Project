@@ -16,7 +16,7 @@ public:
 
 	std::string partType();
 	double calcDrag();
-	void setMass(double inMass);	
+	void setMass(double inMass);
 private:
 	int numPassengers;	// will add mass to rocket
 	double pathEfficiency;	// linear efficiency term to represent deviation from optimal path

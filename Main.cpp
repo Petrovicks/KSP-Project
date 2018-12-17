@@ -28,7 +28,7 @@ int main() {
 	cin >> cHull_mass;
 	c1->setMass(cHull_mass);
 
-	plutoisaplanet += c1;	
+	plutoisaplanet += c1;
 	cout << "Part type: " << plutoisaplanet.getPartType(0) << endl;
 	cout << "Part mass: " << plutoisaplanet.getPartMass(0) << endl << endl;
 
@@ -93,7 +93,7 @@ int main() {
 	plutoisaplanet.returnAllParts();
 	cout << endl;
 
-	//This new function sets changes the values of the member variables. 
+	//This function changes the values of the member variables using the rocket part values.
 	plutoisaplanet.constructRocket();
 	bool success = plutoisaplanet.takeAJourney();
 

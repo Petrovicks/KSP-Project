@@ -20,14 +20,14 @@
 
 using namespace std;
 
-//Allow for a maximum of 20 planets. Defaults all fields to 0. 
+//Allow for a maximum of 20 planets. Defaults all fields to 0.
 template <typename T>
 struct Planets {
 	T position[20] = {0}, orbit[20] = {0}, radius[20] = {0}, mass[20] = {0}, gravity[20] = {0};
 	vector<string> planetName = vector<string>(20);
 };
 
-//Enums used to make it easier to add/remove parameters as needed. 
+//Enums used to make it easier to add/remove parameters as needed.
 enum parameterName {
 	Position,
 	Orbit,
@@ -36,11 +36,11 @@ enum parameterName {
 	Gravity,
 };
 
-//Sanitizes the input so it's easier to deal with (eliminates spaces, all to lowercase). 
+//Sanitizes the input so it's easier to deal with (eliminates spaces, all to lowercase).
 string sanitizeLine(string const& inString) {
 	string sanitized = inString;
 	sanitized.erase( remove(sanitized.begin(), sanitized.end(), ' '), sanitized.end() );
-	transform(sanitized.begin(), sanitized.end(), sanitized.begin(), ::tolower); //thanks stackoverflow
+	transform(sanitized.begin(), sanitized.end(), sanitized.begin(), ::tolower); //transforms string to lowercase
 
 	return sanitized;
 }
@@ -75,7 +75,7 @@ double getValueFromLine(string const& inString) {
 	string sanitizedString = sanitizeLine(inString);
 	int equalSign = sanitizedString.find('=');
 	string valueString = sanitizedString.substr(equalSign+1);
-	return stod(valueString); //COMPILED WITH C++11
+	return stod(valueString); //compiled using c++11
 }
 
 
@@ -106,7 +106,6 @@ namespace planetParameters
 							break;
 						case Mass:
 							planetList.mass[planetID] = getValueFromLine(line);
-							cout << "Mass: " << planetList.mass[planetID] << endl;
 							break;
 						case Gravity:
 							planetList.gravity[planetID] = getValueFromLine(line);

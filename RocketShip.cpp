@@ -7,11 +7,13 @@
 #include <string>
 #include <iostream>
 #include <fstream>
+#include <cmath>
 
 using namespace std;
 
 RocketShip::RocketShip() {}
 
+//Copy constructor.
 RocketShip& RocketShip::operator=(const RocketShip& r) {
 	this->parts = r.parts;
 	return *this;
@@ -22,14 +24,14 @@ RocketShip& RocketShip::operator+=(RocketPart* p) {
 	return *this;
 }
 
-double RocketShip::calculateTWR() {
-	return thrust / (mass * 9.81); //total Thrust over total Weight on Earth
+double RocketShip::calculateTWR(double inG) {
+	return thrust / (mass * inG); //total Thrust over total weight of planet
 }
 
 double RocketShip::calculateDeltaV() {
-	//Dry mass
 	double dryMass = this->mass - this->fuelCapacity;
 
+	//tsiolkovsky equation
 	return this->thrust * log(this->mass / dryMass);
 }
 
@@ -44,7 +46,7 @@ double RocketShip::calculateDeltaV() {
 void RocketShip::constructRocket() {
 	for(int i = 0; i < parts.size(); i++) {
 		mass+=parts[i]->getMass();
-		drag+=parts[i]->calcDrag();
+		drag*=parts[i]->calcDrag();
 		switch (hashPartNames(parts[i]->partType())) {
 			case _Thruster:
 			{
@@ -69,7 +71,7 @@ void RocketShip::constructRocket() {
 	}
 }
 
-//all parts
+//Function to print all parts and their ID.
 void RocketShip::returnAllParts() {
 	cout << "Constructed rocket: " << endl;
 	for (int i = 0; i < parts.size(); i++) {
@@ -77,11 +79,12 @@ void RocketShip::returnAllParts() {
 	}
 }
 
-//specific part information exmaple
+//Returnsa string corresponding to the part type.
 string RocketShip::getPartType(int ID) {
 	return parts[ID]->partType();
 }
 
+//getMass() is a base class function.
 double RocketShip::getPartMass(int ID) {
 	return parts[ID]->getMass();
 }
@@ -107,7 +110,7 @@ bool RocketShip::takeAJourney() {
 	int originID = planetParameters::planetCount+1;
 
 	//Light trap for invalid numbers.
-	while (originID > planetParameters::planetCount || originID < 0) {
+	while (originID > planetParameters::planetCount || originID < 1) {
 		cin >> originID;
 	}
 
@@ -122,7 +125,7 @@ bool RocketShip::takeAJourney() {
 	int destinationID = planetParameters::planetCount + 1;
 
 	//Light trap for invalid numbers.
-	while (destinationID > planetParameters::planetCount || destinationID < 0) {
+	while (destinationID > planetParameters::planetCount || destinationID < 1) {
 		cin >> destinationID;
 	}
 
@@ -143,34 +146,40 @@ bool RocketShip::takeAJourney() {
 	dV = this->calculateDeltaV();
 
 	cout << "The rocket's maximum change of velocity is " << dV << "." << endl;
-	
+
 	// //================================
-	// // Here comes the math. I have no idea what I'm doing.
+	// // Rough math for calculating the requied deltaV to
+	// // perform a Hohmann orbit transfer as well as escape the
+	// // origin's gravitational pull.
 	// //================================
 
 	double Ve = sqrt(2*gConstant*planetParameters::planetList.mass[originID]
 					 / planetParameters::planetList.radius[originID]); //Escape velocity of the origin.
 
-	// Holmann orbit transfer I guess? Sum total of these two should be the required delV total.
-	double delV1 = Ve*(sqrt(2*planetParameters::planetList.orbit[destinationID]
+	// (rough) Hohmann orbit transfer. Some values may be incorrect.
+	double delV1 = sqrt(2*gConstant*planetParameters::planetList.mass[originID]
+					    / planetParameters::planetList.orbit[originID])
+					*(sqrt(2*planetParameters::planetList.orbit[destinationID]
 							/planetParameters::planetList.orbit[destinationID]
 							+planetParameters::planetList.orbit[originID]) - 1);
 
 	double delV2 = 	sqrt(2*gConstant*planetParameters::planetList.mass[originID]
-					 	 / planetParameters::planetList.radius[destinationID])
-					*(sqrt(2*planetParameters::planetList.orbit[originID]
+					 	/ planetParameters::planetList.orbit[destinationID])
+					*(1- sqrt(2*planetParameters::planetList.orbit[originID]
 							/planetParameters::planetList.orbit[destinationID]
-							+planetParameters::planetList.orbit[originID])-1);
+							+planetParameters::planetList.orbit[originID]));
 
-	if (dV < Ve) {
+
+	delVDifference = dV - (delV1 + delV2);
+
+	if (dV < Ve || this->calculateTWR(planetParameters::planetList.gravity[originID]) < 1) {
 		cout << "Rocket failed to escape the origin's gravity." << endl;
 		cout << "Please see generated text file for details." << endl;
 		failure = true;
 	}
 
-	if (dV < delV1 + delV2) {
-		delVDifference = dV - (delV1 + delV2);
-		cout << "Failed to make the journey by" << delVDifference << endl;
+	if (dV < delV1 + delV2 || failure) {
+		cout << "Failed to make the journey by " << abs(delVDifference) << " m/s." << endl;
 	}
 
 	else {
@@ -180,10 +189,10 @@ bool RocketShip::takeAJourney() {
 	ofstream outFile;
 	outFile.open("Rocket_postmortem.txt");
 	if(failure) {
-		outFile << "There's always next time.\n\n\n";
+		outFile << "There's always next time.\n\n";
 	}
 	else {
-		outFile << "Congratulations on the sucecssful launch.\n\n\n";
+		outFile << "Congratulations on the sucecssful launch.\n\n";
 	}
 
 	outFile << "Origin planet: " << planetParameters::planetList.planetName[originID] << "\n"
@@ -196,7 +205,7 @@ bool RocketShip::takeAJourney() {
 			<< "Orbit: " << planetParameters::planetList.orbit[destinationID] << " km\n"
 			<< "Mass: " << planetParameters::planetList.mass[destinationID] << " kg\n"
 			<< "Radius: " << planetParameters::planetList.radius[destinationID] << " km\n"
-			<< "\n\n\n"
+			<< "\n\n"
 			<< "Delta V potential of rocket: " << dV << " m/s\n"
 			<< "Delta V required to make the journey: " << delV1+delV2 << " m/s\n"
 			<< "Delta V difference: " << delVDifference << " m/s\n";

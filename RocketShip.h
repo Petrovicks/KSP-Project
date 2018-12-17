@@ -34,7 +34,7 @@ public:
 	RocketShip& operator=(const RocketShip& r);
 	RocketShip& operator+=(RocketPart* p);
 
-	double calculateTWR();
+	double calculateTWR(double);
 	double calculateDeltaV();
 
 	void constructRocket();
@@ -48,13 +48,13 @@ public:
 private:
 	double mass;
 	double thrust;
-	double drag;
+	double drag = 1.00;
 	double dV;
 	double TWR;
 	double efficiency;
 	double fuelCapacity;
 
-	//Vector of base class pointers. 
+	//Vector of base class pointers.
 	std::vector<RocketPart*> parts;
 };
 
