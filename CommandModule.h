@@ -9,7 +9,7 @@ public:
 	CommandModule();
 
 	int getNumberPassengers();
-	double getPathEffiency();
+	double getPathEfficiency();
 
 	void setNumberPassengers(int inPassengers);
 	void setPathEfficiency(double inPathEff);

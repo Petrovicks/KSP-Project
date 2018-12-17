@@ -7,6 +7,7 @@
 class FuelTank : public RocketPart {
 public:
 	FuelTank();
+	~FuelTank() {};
 
 	double getCapacity();
 	double getFuelDensity();

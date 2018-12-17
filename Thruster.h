@@ -7,6 +7,7 @@
 class Thruster : public RocketPart{
 public:
 	Thruster();
+	~Thruster() {};
 
 	double getThrust();
 	double getEfficiency();

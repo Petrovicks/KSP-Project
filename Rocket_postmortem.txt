@@ -1,0 +1,20 @@
+Congratulations on the sucecssful launch.
+
+
+Origin planet: Earth
+Gravity: 9.81 m/s^2
+Orbit: 9.4e+08 km
+Mass: 5.9e+24 kg
+Radius: 6371 km
+
+Destination planet: Moon
+Gravity: 1.62 m/s^2
+Orbit: 9.404e+08 km
+Mass: 7.34e+22 kg
+Radius: 1079 km
+
+
+
+Delta V potential of rocket: -nan(ind) m/s
+Delta V required to make the journey: 3.69602e+10 m/s
+Delta V difference: 0 m/s

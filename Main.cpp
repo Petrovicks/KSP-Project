@@ -3,7 +3,6 @@
 #include "FuelTank.h"
 #include "Thruster.h"
 #include "RocketShip.h"
-#include "Destinations.h"
 #include <iostream>
 
 using namespace std;
@@ -29,8 +28,7 @@ int main() {
 	cin >> cHull_mass;
 	c1->setMass(cHull_mass);
 
-	plutoisaplanet += c1;
-	plutoisaplanet.returnAllParts();
+	plutoisaplanet += c1;	
 	cout << "Part type: " << plutoisaplanet.getPartType(0) << endl;
 	cout << "Part mass: " << plutoisaplanet.getPartMass(0) << endl << endl;
 
@@ -60,7 +58,6 @@ int main() {
 	f1->setMass(fHull_mass);
 
 	plutoisaplanet += f1;
-	plutoisaplanet.returnAllParts();
 	cout << "Part type: " << plutoisaplanet.getPartType(1) << endl;
 	cout << "Part mass: " << plutoisaplanet.getPartMass(1) << endl << endl;
 
@@ -89,18 +86,24 @@ int main() {
 	t1->setMass(tHull_mass);
 
 	plutoisaplanet += t1;
-	plutoisaplanet.returnAllParts();
 	cout << "Part type: " << plutoisaplanet.getPartType(2) << endl;
 	cout << "Part mass: " << plutoisaplanet.getPartMass(2) << endl << endl;
 
+	cout << "All parts: " << endl;
+	plutoisaplanet.returnAllParts();
+	cout << endl;
 
+	//This new function sets changes the values of the member variables. 
+	plutoisaplanet.constructRocket();
+	bool success = plutoisaplanet.takeAJourney();
 
+	if (success) {
+		cout << "Congratulations. Goodbye" << endl;
+		return 0;
+	}
 
-	//================
-	// File processing
-	//================
-	ifstream testFile;
-	testFile.open("Destinations.ini");
-	destinationParameters::getDestinationParams(testFile); //Printing values in ini file as a test for reading in files.
-	return 0;
+	else {
+		cout << "Sorry. Goodbye." << endl;
+		return 0;
+	}
 }
